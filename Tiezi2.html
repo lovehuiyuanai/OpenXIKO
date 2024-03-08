@@ -1,0 +1,55 @@
+<!DOCTYPE html>    
+<html lang="en">    
+<head>    
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>帖子框组件</title>    
+    <style>    
+        .post-container {    
+            border: 1px solid #ccc;    
+            padding: 10px;    
+            margin-bottom: 10px;    
+            position: relative; /* 添加相对定位 */  
+            display: flex; /* 使用flex布局 */  
+            flex-direction: column; /* 垂直方向排列子元素 */  
+            justify-content: flex-start; /* 子元素顶部对齐 */  
+            align-items: flex-start; /* 子元素左对齐 */  
+        }    
+        .username {    
+            font-weight: bold;    
+            display: flex; /* 使用flex布局 */  
+            align-items: center; /* 子元素垂直居中对齐 */  
+        }    
+        .metadata {    
+            font-size: 0.8em;    
+            color: #666;    
+            margin-top: 5px;    
+        }    
+        .content {    
+            margin-top: 10px; /* 调整为合适的上边距 */  
+        }    
+        .username img {    
+            height: 20px; /* 调整到合适的高度 */    
+            margin-left: 1px; /* 图片与用户名之间的间距 */  
+        }    
+        .post-time { /* 新添加的样式 */  
+            position: absolute; /* 绝对定位 */  
+            bottom: 10px; /* 距离容器底部10px */  
+            right: 10px; /* 距离容器左侧10px */  
+            font-size: 0.8em; /* 字体大小 */  
+            color: #666; /* 字体颜色 */  
+        }    
+    </style>    
+</head>    
+<body>    
+    <div class="post-container">    
+        <div class="username">哀的大喵<img src="langou.png" alt="认证图标"></div>    
+        <div class="metadata">XIKO站长</div>    
+        <div class="content">    
+            <p style="margin-top: 0; margin-bottom: 0;">这是一段文本。</p>  
+            <p style="margin-top: 0; margin-bottom: 0;">这是一段文本。</p>    
+        </div>    
+        <div class="post-time">2024-3-6 22:02发布</div> <!-- 新添加的时间元素 -->  
+    </div>    
+</body>    
+</html>

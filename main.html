@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Xiko Main Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      background-color: #f8f8f8;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .post-container {
+      width: 80%;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    #post-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .post {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .post h3 {
+      margin: 0;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .post p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>XIKO</h1>
+    <p id="greeting">Hello, Mikoto</p>
+  </div>
+  <div class="post-container">
+    <textarea id="post-input" rows="4" placeholder="写下你的帖子..."></textarea>
+    <button onclick="submitPost()">发布</button>
+  </div>
+  <div id="posts">
+    <!-- 帖子将在这里显示 -->
+  </div>
+  <script>
+    // 获取帖子并添加到页面中
+    fetch('/getPosts')
+      .then(response => response.json())
+      .then(posts => {
+        const postsDiv = document.getElementById('posts');
+        posts.forEach(post => {
+          const postDiv = document.createElement('div');
+          postDiv.className = 'post';
+          postDiv.innerHTML = `
+            <h3>${post.class} ${post.name}</h3>
+            <p>${post.content}</p>
+            <p>${new Date(post.timestamp).toLocaleString()}</p>
+          `;
+          postsDiv.appendChild(postDiv);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+
+    // 提交新帖子
+    function submitPost() {
+      const content = document.getElementById('post-input').value;
+      fetch('/post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content }),
+      })
+      .then(response => response.text())
+      .then(message => {
+        alert(message);
+        location.reload();
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>
